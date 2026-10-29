@@ -1,8 +1,5 @@
 from django.db import models
  
-
-
-
 class Education(models.Model):
     education_id = models.AutoField(primary_key=True)
     personal = models.ForeignKey('PersonalDetails', models.DO_NOTHING)
@@ -17,10 +14,8 @@ class Education(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'education'
-
-
 
 class PersonalDetails(models.Model):
     personal_id = models.AutoField(primary_key=True)
@@ -37,9 +32,8 @@ class PersonalDetails(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'personal_details'
-
 
 class ResumeMaster(models.Model):
     resume_id = models.AutoField(primary_key=True)
@@ -51,10 +45,8 @@ class ResumeMaster(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'resume_master'
-
-
 
 class Skills(models.Model):
     skill_id = models.AutoField(primary_key=True)
@@ -66,9 +58,8 @@ class Skills(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'skills'
-
 
 class WorkExperience(models.Model):
     experience_id = models.AutoField(primary_key=True)
@@ -84,9 +75,8 @@ class WorkExperience(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'work_experience'
-
 
 class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
@@ -102,9 +92,8 @@ class Project(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'project'
-
 
 class Certification(models.Model):
     certification_id = models.AutoField(primary_key=True)
@@ -119,9 +108,8 @@ class Certification(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'certification'
-
 
 class Achievement(models.Model):
     achievement_id = models.AutoField(primary_key=True)
@@ -133,9 +121,8 @@ class Achievement(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'achievement'
-
 
 class Strength(models.Model):
     strength_id = models.AutoField(primary_key=True)
@@ -147,9 +134,8 @@ class Strength(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'strength'
-
 
 class Language(models.Model):
     language_id = models.AutoField(primary_key=True)
@@ -162,9 +148,8 @@ class Language(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'language'
-
 
 class AdditionalDetails(models.Model):
     additional_id = models.AutoField(primary_key=True)
@@ -176,7 +161,7 @@ class AdditionalDetails(models.Model):
     updated_by = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'additional_details'
 
 

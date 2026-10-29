@@ -3,7 +3,7 @@ import os
 import json
 import requests
 import pdfplumber
-import docx
+import docx2txt
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -48,11 +48,8 @@ def extract_text_from_file(uploaded_file):
                 if page_text:
                     text += page_text + "\n"
         return text
-
     elif filename.endswith('.docx'):
-        document = docx.Document(uploaded_file)
-        return "\n".join([para.text for para in document.paragraphs])
-
+        return docx2txt.process(uploaded_file)
     else:
         return None
 

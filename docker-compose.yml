@@ -1,0 +1,78 @@
+services:
+
+  # ==========================================================
+  # MYSQL DATABASE
+  # ==========================================================
+
+  db:
+    image: mysql:8.0
+    container_name: resume_mysql
+    restart: always
+
+    environment:
+      MYSQL_DATABASE: resume_builder_db
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}" ]
+      timeout: 20s
+      retries: 10
+      interval: 5s
+
+  # ==========================================================
+  # DJANGO BACKEND
+  # ==========================================================
+
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+
+    container_name: resume_backend
+    restart: always
+
+    env_file:
+      - ./Backend/.env.docker
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    command: >
+      sh -c "python manage.py migrate && gunicorn resumebackend.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 180"
+
+  # ==========================================================
+  # REACT FRONTEND
+  # ==========================================================
+
+  frontend:
+    build:
+      context: ./ai-resume-builder
+      dockerfile: Dockerfile
+      args:
+        VITE_SERVER_BASE_URL: "http://127.0.0.1:8000/api/v1"
+
+    container_name: resume_frontend
+    restart: always
+
+    ports:
+      - "5173:80"
+
+    depends_on:
+      - backend
+
+# ==========================================================
+# PERSISTENT MYSQL STORAGE
+# ==========================================================
+
+volumes:
+  mysql_data:

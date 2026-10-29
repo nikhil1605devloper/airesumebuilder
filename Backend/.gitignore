@@ -4,3 +4,9 @@ db.sqlite3
 __pycache__/
 *.pyc
 .vscode/ 
+.env
+.env.docker
+.env.production
+Backend/.env
+Backend/.env.docker
+Backend/.env.production 
